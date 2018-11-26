@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">ABND_book_record</string>
+    <string name="Failed_insertion_msg">INSERTION FAILED</string>
+    <string name="success_insertion_msg">INSERTION SUCCESSFUL</string>
+    <string name="editBook">Edit a Book</string>
+    <string name="addBook">Add a Book</string>
+    <string name="failedUpdate">No updated data found.</string>
+    <string name="updateSuccessful">Updated succesfully</string>
+    <string name="alertMessage">Discard your changes and quit editing?</string>
+    <string name="discard">Discard</string>
+    <string name="keepEditing">Keep Editing</string>
+    <string name="editor_delete_book_successful">Book deleted</string>
+
+    <!-- Toast message in editor when current book has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_book_failed">Error with deleting book</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current book [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this book?</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current book [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current book [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+    <string name="deleteSuccess">Book entry deleted</string>
+    <string name="deletionFailed">Book entry deletion failed</string>
 </resources>

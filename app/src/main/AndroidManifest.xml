@@ -16,12 +16,24 @@
             android:name=".data.BookProvider"
             android:authorities="com.example.android.abnd_book_record"
             android:exported="false"/>
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+        <activity
+            android:name=".CatalogActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity android:name=".EditorActivity">
+            android:label="Add a book"
+            android:theme="@style/EditorTheme"
+            android:parentActivityName=".CatalogActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CatalogActivity" />
         </activity>
     </application>
 
