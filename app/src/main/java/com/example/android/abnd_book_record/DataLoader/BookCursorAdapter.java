@@ -30,10 +30,10 @@ import static java.security.AccessController.getContext;
 public class BookCursorAdapter extends CursorAdapter {
     int pos=-1;
 
-    TextView tvQuantity;
     BookProvider bookProvider;
     ContentValues contentValues;
     Uri currentUri;
+
 
     public BookCursorAdapter(Context context, Cursor c) {
         super(context, c, 0 /* flags */);
@@ -50,10 +50,10 @@ public class BookCursorAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View view, Context context, final Cursor cursor) {
+    public void bindView(View view, final Context context, final Cursor cursor) {
 
         TextView tvName=view.findViewById(R.id.name);
-        tvQuantity=view.findViewById(R.id.summary);
+        final TextView tvQuantity=view.findViewById(R.id.summary);
         TextView tvPrice=view.findViewById(R.id.price);
         Button buyButton=view.findViewById(R.id.buyButton);
 
@@ -64,8 +64,9 @@ public class BookCursorAdapter extends CursorAdapter {
         tvName.setText(cursor.getString(nameIndex));
         tvQuantity.setText(cursor.getString(quantityIndex));
         tvPrice.setText("Rs. "+cursor.getString(priceIndex));
+        final int quantity=Integer.parseInt(tvQuantity.getText().toString());
 
-        View.OnClickListener myButtonClickListener = new View.OnClickListener() {
+        /*View.OnClickListener myButtonClickListener = new View.OnClickListener() {
           @Override
             public void onClick(View v) {
 
@@ -74,8 +75,22 @@ public class BookCursorAdapter extends CursorAdapter {
               tvQuantity.setText(quantity-1);
 
             }
-        };
-        buyButton.setOnClickListener(myButtonClickListener);
+        };*/
+        buyButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                tvQuantity.setText(quantity-1+"");
+                ContentValues contentValues=new ContentValues();
+                contentValues.put(BookContract.BookEntry.COLUMN_QUANTITY, quantity-1);
+                long id=cursor.getPosition();
+                String selection= BookContract.BookEntry._ID+"="+id;
+
+
+                context.getContentResolver().update(BookContract.BookEntry.CONTENT_URI,contentValues,selection,null);
+
+            }
+        });
 
 
 
