@@ -38,7 +38,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     BookCursorAdapter mCursorAdapter;
     ContentValues contentValues;
     Button buyButton;
-    Button editButton;
+
     Uri currentUri;
     int stock;
 
@@ -50,7 +50,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
-        editButton = findViewById(R.id.editButton);
+
         buyButton = findViewById(R.id.buyButton);
 
         // Setup FAB to open EditorActivity
@@ -75,7 +75,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         bookListView.setEmptyView(emptyView);
 
         buyButton = bookListView.findViewById(R.id.buyButton);
-        editButton = bookListView.findViewById(R.id.editButton);
+
 
 
         mDbHelper = new BookDbHelper(this);
@@ -89,27 +89,19 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         getLoaderManager().initLoader(BOOK_LOADER, null, this);
 
-/*
+
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, final long id) {
-
-
-                editButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
-                        intent.putExtra("title", "Edit a book");
-                        currentUri = ContentUris.withAppendedId(BookContract.BookEntry.CONTENT_URI, id);
-                        intent.setData(currentUri);
-                        startActivity(intent);
-                    }
-                });
-
+      Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                intent.putExtra("title", "Edit a book");
+                currentUri = ContentUris.withAppendedId(BookContract.BookEntry.CONTENT_URI, id);
+                intent.setData(currentUri);
+                startActivity(intent);
 
             }
-        });*/
+        });
     } //onCreate
 
 
@@ -149,35 +141,5 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     }
 
-/*
-Toast.makeText(this,"Buy Button Pressed",Toast.LENGTH_LONG).show();
- */
-
-
-
-  /*  @Override
-    public void onClick(View v) {
-        if(v.equals(editButton))
-        {
-            Toast.makeText(this,"*********EDIT Button Pressed*************",Toast.LENGTH_LONG).show();
-
-        }
-        else if(v.equals(buyButton)) {
-            Toast.makeText(this,"########Buy Button Pressed",Toast.LENGTH_LONG).show();
-            TextView priceTV= findViewById(R.id.summary);
-            stock=Integer.parseInt(priceTV.getText().toString());
-            if (stock > 0) {
-                contentValues.put(BookContract.BookEntry.COLUMN_QUANTITY, --stock);
-                mContentResolver.update(
-                        currentUri,
-                        contentValues,
-                        null,
-                        null);
-            }
-            priceTV.setText(stock);
-        }
-        }
-
-        }*/
     }
 

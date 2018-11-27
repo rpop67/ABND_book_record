@@ -39,15 +39,7 @@
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="#AEB6BD"  />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:id="@+id/editButton"
-            android:layout_marginHorizontal="2dp"
-            android:text="BUY"
-            android:onClick="editFunc"
-            android:layout_toLeftOf="@id/buyButton"/>
+
 
         <Button
             android:layout_width="wrap_content"
@@ -56,6 +48,7 @@
             android:text="BUY"
             android:id="@+id/buyButton"
             android:onClick="buyFunc"
+            android:focusable="false"
             android:layout_alignParentRight="true"/>
 
 
