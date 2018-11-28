@@ -221,8 +221,8 @@ public class BookProvider extends ContentProvider {
                 rowsDeleted = db.delete(BookContract.BookEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case BOOK_ID:
-                selection= BookContract.BookEntry._ID+"=?";
-                selectionArgs=new String[]{String.valueOf(ContentUris.parseId(uri))};
+                selection = BookContract.BookEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 rowsDeleted = db.delete(BookContract.BookEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:throw new IllegalArgumentException("Deletion is not supported for " + uri);

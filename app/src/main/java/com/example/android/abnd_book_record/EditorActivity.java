@@ -2,6 +2,7 @@ package com.example.android.abnd_book_record;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -15,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     TextView TextTitle;
     Button Upload;
     Button DelButton;
+    ImageButton incrementButton;
+    ImageButton decrementButton;
     Uri currentBookURI;
     private boolean mPetHasChanged = false;
 
@@ -44,7 +48,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             return false;
         }
     };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         EditContact = findViewById(R.id.etContact);
         Upload = findViewById(R.id.uploadButton);
         TextTitle = findViewById(R.id.tvTitle);
-        DelButton=findViewById(R.id.deleteButton);
-
+        DelButton = findViewById(R.id.deleteButton);
+        incrementButton = findViewById(R.id.incButton);
+        decrementButton = findViewById(R.id.decButton);
 
 
         EditContact.setOnTouchListener(mTouchListener);
@@ -79,6 +83,32 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             TextTitle.setText(R.string.editBook);
             DelButton.setVisibility(View.VISIBLE);
         }
+
+        incrementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+
+            {
+                int quantity = Integer.parseInt(EditQuantity.getText().toString());
+                quantity++;
+                EditQuantity.setText(quantity + "");
+            }
+        });
+
+        decrementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+
+            {
+
+                int quantity = Integer.parseInt(EditQuantity.getText().toString());
+                if (quantity > 0) {
+                    quantity--;
+                    EditQuantity.setText(quantity + "");
+
+                }
+            }
+        });
 
 
     }
@@ -136,9 +166,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * Perform the deletion of the pet in the database.
      */
     private void deleteBook() {
-        if(currentBookURI!=null)
-        {
-            int rowsDeleted=getContentResolver().delete(currentBookURI,null,null);
+        if (currentBookURI != null) {
+            int rowsDeleted = getContentResolver().delete(currentBookURI, null, null);
             if (rowsDeleted == 0) {
                 // If no rows were deleted, then there was an error with the delete.
                 Toast.makeText(this, getString(R.string.deletionFailed),
@@ -177,9 +206,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     }
 
 
-
-    public void updateData()
-    {
+    public void updateData() {
         String product = EditProduct.getText().toString().trim();
         int quantity = Integer.parseInt(String.valueOf(EditQuantity.getText()));
         int price = Integer.parseInt(EditPrice.getText().toString().trim());
@@ -202,6 +229,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             Toast.makeText(this, getString(R.string.updateSuccessful),
                     Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
@@ -231,59 +259,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             Toast.makeText(this, R.string.success_insertion_msg, Toast.LENGTH_SHORT).show();
         }
 
+
     }
 
-    /* public void readData() {
-         //need to create projection[], selection and selectioargs[] for corresponding sql query
-         //projection contains columns that needs to be displayed
-         String[] projection = {
-                 BookContract.BookEntry.COLUMN_PROD_NAME,
-                 BookContract.BookEntry.COLUMN_QUANTITY,
-                 BookContract.BookEntry.COLUMN_PRICE,
-                 BookContract.BookEntry.COLUMN_SELLER_NAME,
-                 BookContract.BookEntry.COLUMN_SELLER_CONTACT
-
-         };
-
-         Cursor cursor = db.query(BookContract.BookEntry.TABLE_NAME, projection, null, null, null, null, null);
-
-         try {
-
-             TextView display = findViewById(R.id.tvDisplay);
-
-             //display column names
-             display.setText("\n" + BookContract.BookEntry.COLUMN_PROD_NAME + "   "
-                     + BookContract.BookEntry.COLUMN_QUANTITY + "   "
-                     + BookContract.BookEntry.COLUMN_PRICE + "   "
-                     + BookContract.BookEntry.COLUMN_SELLER_NAME + "   "
-                     + BookContract.BookEntry.COLUMN_SELLER_CONTACT + "\n\n");
-             //extract column index
-             int indexProd = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_PROD_NAME);
-             int indexQuantity = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_QUANTITY);
-             int indexPrice = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_PRICE);
-             int indexSeller = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_SELLER_NAME);
-             int indexContact = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_SELLER_CONTACT);
-
-
-
-             //while data is present
-             while (cursor.moveToNext()) {
-                 String getProd = cursor.getString(indexProd);
-                 int getQuantity = cursor.getInt(indexQuantity);
-                 int getPrice = cursor.getInt(indexPrice);
-                 String getSeller = cursor.getString(indexSeller);
-                 String getContact = cursor.getString(indexContact);
-                 display.append("\n" + getProd + " - " + getQuantity + " - " + getPrice + " - " + getSeller + " - " + getContact);
-
-
-             }
-         } finally {
-             // Always close the cursor when you're done reading from it. This releases all its
-             // resources and makes it invalid.
-             cursor.close();
-         }
-     }
- */
     public void reset() {
         EditProduct.setText("");
         EditQuantity.setText("");
@@ -295,59 +273,79 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     public void uploadFunc(View view) {
         if (currentBookURI == null) {
-            if (!EditProduct.getText().toString().equals("") && !EditQuantity.getText().toString().equals("") && !EditContact.getText().toString().equals("") && !EditSeller.getText().toString().equals("")
-                    && !EditSeller.getText().toString().equals("")) {
 
+            if (EditProduct.getText().toString().isEmpty()) {
+                Toast.makeText(this, R.string.enter_full_details, Toast.LENGTH_SHORT).show();
+            } else if ((EditQuantity.getText().toString().isEmpty()) || (!EditQuantity.getText().toString().isEmpty() && Integer.parseInt(EditQuantity.getText().toString()) <= 0)) {
+                Toast.makeText(this, R.string.valid_Quantity, Toast.LENGTH_SHORT).show();
+            } else if ((EditContact.getText().toString().isEmpty()) || (!EditContact.getText().toString().isEmpty() && EditContact.getText().toString().length() != 10)) {
+                Toast.makeText(this, R.string.valid_Contact, Toast.LENGTH_SHORT).show();
+            } else if ((EditPrice.getText().toString().isEmpty()) || (!EditPrice.getText().toString().isEmpty() && Integer.parseInt(EditPrice.getText().toString()) <= 0)) {
+                Toast.makeText(this, R.string.validAmount, Toast.LENGTH_SHORT).show();
+            } else if (EditSeller.getText().toString().isEmpty()) {
+                Toast.makeText(this, R.string.valid_seller, Toast.LENGTH_SHORT).show();
+            } else {
                 insertData();
                 finish();
                 reset();
+            }
 
+        }//end Inside if
+
+        else {
+
+            if (EditProduct.getText().toString().isEmpty()) {
+                Toast.makeText(this, R.string.enter_full_details, Toast.LENGTH_SHORT).show();
+            } else if ((EditQuantity.getText().toString().isEmpty()) || (!EditQuantity.getText().toString().isEmpty() && Integer.parseInt(EditQuantity.getText().toString()) <= 0)) {
+                Toast.makeText(this, R.string.valid_Quantity, Toast.LENGTH_SHORT).show();
+            } else if ((EditContact.getText().toString().isEmpty()) || (!EditContact.getText().toString().isEmpty() && EditContact.getText().toString().length() != 10)) {
+                Toast.makeText(this, R.string.valid_Contact, Toast.LENGTH_SHORT).show();
+            } else if ((EditPrice.getText().toString().isEmpty()) || (!EditPrice.getText().toString().isEmpty() && Integer.parseInt(EditPrice.getText().toString()) <= 0)) {
+                Toast.makeText(this, R.string.validAmount, Toast.LENGTH_SHORT).show();
+            } else if (EditSeller.getText().toString().isEmpty()) {
+                Toast.makeText(this, R.string.valid_seller, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Fill full details", Toast.LENGTH_SHORT).show();
-            }//end Inside if
-
-        } else {
-            updateData();
-            finish();
-            reset();
+                updateData();
+                finish();
+                reset();
+            }
 
 
         }
     }
-
 
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         /** Content URI for the existing pet (null if it's a new pet) */
 
-        if(currentBookURI!=null)
-        {
+        if (currentBookURI != null) {
 
-        String[] Projection = {
-                BookContract.BookEntry._ID,
-                BookContract.BookEntry.COLUMN_PROD_NAME,
-                BookContract.BookEntry.COLUMN_PRICE,
-                BookContract.BookEntry.COLUMN_QUANTITY,
-                BookContract.BookEntry.COLUMN_SELLER_NAME,
-                BookContract.BookEntry.COLUMN_SELLER_CONTACT
+            String[] Projection = {
+                    BookContract.BookEntry._ID,
+                    BookContract.BookEntry.COLUMN_PROD_NAME,
+                    BookContract.BookEntry.COLUMN_PRICE,
+                    BookContract.BookEntry.COLUMN_QUANTITY,
+                    BookContract.BookEntry.COLUMN_SELLER_NAME,
+                    BookContract.BookEntry.COLUMN_SELLER_CONTACT
 
 
-        };
-        return new CursorLoader(this, currentBookURI, Projection, null, null, null);
-      }
-      else
-          return null;
+            };
+            return new CursorLoader(this, currentBookURI, Projection, null, null, null);
+        } else
+            return null;
     }
 
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor){
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
         if (cursor == null || cursor.getCount() < 1) {
             return;
         }
-        if(currentBookURI!=null) {
+        if (currentBookURI != null) {
+            incrementButton.setVisibility(View.VISIBLE);
+            decrementButton.setVisibility(View.VISIBLE);
             if (cursor.moveToFirst()) {
                 // Find the columns of pet attributes that we're interested in
                 int nameColumnIndex = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_PROD_NAME);
@@ -370,8 +368,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 EditContact.setText(sellerContact);
 
             }
+        } else {
+            incrementButton.setVisibility(View.INVISIBLE);
+            decrementButton.setVisibility(View.INVISIBLE);
         }
-
     }
 
     @Override
@@ -383,12 +383,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         EditContact.setText("");
     }
 
-    public void delFunc(View view)
-    {
+    public void delFunc(View view) {
         showDeleteConfirmationDialog();
-
-
     }
-
-
 }

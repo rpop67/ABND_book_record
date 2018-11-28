@@ -24,4 +24,14 @@
     <string name="cancel">Cancel</string>
     <string name="deleteSuccess">Book entry deleted</string>
     <string name="deletionFailed">Book entry deletion failed</string>
+    <string name="Failed_to_update">Failed to update item</string>
+    <string name="updated_item_successfully">Updated item successfully</string>
+    <string name="out_of_stock">Yikes, out of stock!</string>
+    <string name="valid_Quantity">Enter valid quantity</string>
+    <string name="valid_Contact">Enter valid contact number of 10 digits</string>
+    <string name="validAmount">Enter valid amount</string>
+    <string name="valid_seller">Enter Seller name</string>
+    <string name="enter_full_details">Fill full details</string>
+    <string name="update_failed">Updation Failed!</string>
+    <string name="updated_entries">Updated entries!</string>
 </resources>

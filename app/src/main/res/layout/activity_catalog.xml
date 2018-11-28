@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CatalogActivity"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    tools:context=".CatalogActivity">
 
     <ListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list">
+        android:layout_height="match_parent">
 
     </ListView>
+
     <RelativeLayout
         android:id="@+id/empty_view"
         android:layout_width="wrap_content"
@@ -23,8 +23,7 @@
             android:id="@+id/empty_shelter_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            />
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/empty_title_text"
@@ -35,7 +34,7 @@
             android:fontFamily="sans-serif-medium"
             android:paddingTop="16dp"
             android:text="It's getting lonely here"
-            android:textAppearance="?android:textAppearanceMedium"/>
+            android:textAppearance="?android:textAppearanceMedium" />
 
         <TextView
             android:id="@+id/empty_subtitle_text"
@@ -47,7 +46,7 @@
             android:paddingTop="8dp"
             android:text="Start by adding a book"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#A2AAB0"/>
+            android:textColor="#A2AAB0" />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -57,6 +56,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="5dp"
-        android:src="@drawable/ic_library_books_black_24dp"/>
+        android:src="@drawable/ic_library_books_black_24dp" />
 </RelativeLayout>
 

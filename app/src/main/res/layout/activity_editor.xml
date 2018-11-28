@@ -8,169 +8,187 @@
     tools:context="com.example.android.abnd_book_record.EditorActivity">
 
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:background="@color/colorPrimary"
         android:padding="7dp"
-        android:id="@+id/tvTitle"
 
-        tools:text="TITLE GOES HERE"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"/>
+        android:textSize="20sp"
+        tools:text="TITLE GOES HERE" />
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginVertical="50dp"
-        android:layout_marginHorizontal="20dp"
-        >
-
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvName"
+        <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Seller name "
-            android:textSize="18sp" />
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="50dp"
+            android:orientation="vertical">
 
-        <EditText
 
-            android:id="@+id/etSellerName"
-            android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seller name "
+                    android:textSize="18sp" />
+
+                <EditText
+
+                    android:id="@+id/etSellerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:inputType="textCapWords"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact no"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/etContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:inputType="phone"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/etPname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:inputType="textCapWords"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity"
+                    android:textSize="18sp" />
+
+                <ImageButton
+                    android:id="@+id/incButton"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_toLeftOf="@id/etQuantity"
+                    android:src="@drawable/ic_inc"
+                    android:textSize="10sp"
+                    android:visibility="invisible" />
+
+                <ImageButton
+                    android:id="@+id/decButton"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_toLeftOf="@id/incButton"
+                    android:src="@drawable/ic_dec"
+                    android:textSize="10sp"
+                    android:visibility="invisible" />
+
+                <EditText
+                    android:id="@+id/etQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:inputType="number"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/etPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:inputType="number"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/uploadButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            android:layout_gravity="right"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact no"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/etContact"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvPname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Product"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/etPname"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Price"
-            android:textSize="18sp" />
-
-        <EditText
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:id="@+id/etPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvQuantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quantity"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/etQuantity"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textSize="18sp" />
-    </RelativeLayout>
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/uploadButton"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="uploadFunc"
-        android:textSize="15sp"
-        android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"
-        android:text="SAVE ITEM" />
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:onClick="uploadFunc"
+            android:text="SAVE ITEM"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/deleteButton"
-            android:layout_above="@id/uploadButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="delFunc"
+            android:layout_above="@id/uploadButton"
             android:layout_marginVertical="20dp"
-            android:textSize="15sp"
-            android:textColor="@android:color/white"
             android:background="@color/colorPrimary"
-            android:text="Delete ITEM" />
+            android:onClick="delFunc"
+            android:text="Delete ITEM"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

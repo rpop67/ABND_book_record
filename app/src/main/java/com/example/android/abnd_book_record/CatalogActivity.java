@@ -29,10 +29,10 @@ import com.example.android.abnd_book_record.data.BookDbHelper;
  * Created by Akanksha_Rajwar on 23-11-2018.
  */
 
-public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> /*,View.OnClickListener */{
+public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> /*,View.OnClickListener */ {
 
 
-    private static final int BOOK_LOADER=0;
+    private static final int BOOK_LOADER = 0;
     private ContentResolver mContentResolver;
 
     BookCursorAdapter mCursorAdapter;
@@ -50,15 +50,11 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
-
         buyButton = findViewById(R.id.buyButton);
-
         // Setup FAB to open EditorActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         mContentResolver = this.getContentResolver();
         contentValues = new ContentValues();
-
-
         //intent to editor activity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,20 +69,10 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         //Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
         bookListView.setEmptyView(emptyView);
-
         buyButton = bookListView.findViewById(R.id.buyButton);
-
-
-
         mDbHelper = new BookDbHelper(this);
         mCursorAdapter = new BookCursorAdapter(this, null);
         bookListView.setAdapter(mCursorAdapter);
-        //buyButton.setOnClickListener(this);
-        //editButton.setOnClickListener(this);
-
-
-
-
         getLoaderManager().initLoader(BOOK_LOADER, null, this);
 
 
@@ -94,7 +80,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, final long id) {
-      Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
                 intent.putExtra("title", "Edit a book");
                 currentUri = ContentUris.withAppendedId(BookContract.BookEntry.CONTENT_URI, id);
                 intent.setData(currentUri);
@@ -103,9 +89,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
     } //onCreate
-
-
-
 
 
     @Override
@@ -117,7 +100,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] Projection={
+        String[] Projection = {
                 BookContract.BookEntry._ID,
                 BookContract.BookEntry.COLUMN_PROD_NAME,
                 BookContract.BookEntry.COLUMN_PRICE,
@@ -127,7 +110,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
 
         };
-        return new CursorLoader(this, BookContract.BookEntry.CONTENT_URI,Projection,null,null,null);
+        return new CursorLoader(this, BookContract.BookEntry.CONTENT_URI, Projection, null, null, null);
     }
 
     @Override
@@ -141,5 +124,5 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     }
 
-    }
+}
 

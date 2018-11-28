@@ -22,10 +22,10 @@ public class BookContract {
         public static final String COLUMN_SELLER_NAME = "SELLER_NAME";
         public static final String COLUMN_SELLER_CONTACT = "SELLER_CONTACT";
 
-        public static final String CONTENT_AUTHORITY="com.example.android.abnd_book_record";
-        public static final Uri BASE_CONTENT_URI=Uri.parse("content://"+CONTENT_AUTHORITY);
+        public static final String CONTENT_AUTHORITY = "com.example.android.abnd_book_record";
+        public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
         public static final String PATH = "books";
-        public static final Uri CONTENT_URI=Uri.withAppendedPath(BASE_CONTENT_URI,PATH);
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH);
 
         public static final String CONTENT_LIST_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
